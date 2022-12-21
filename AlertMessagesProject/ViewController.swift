@@ -21,14 +21,36 @@ class ViewController: UIViewController {
 
     @IBAction func SignUpTapped(_ sender: Any) {
         
-        let WarningMessage = UIAlertController(title: "Error Message", message: "Email is not correct", preferredStyle: UIAlertController.Style.alert)
+        if EmailTextField.text == "" {
+            //Emailini girmemissin.
+            AlertCreated(titleInput: "Error!", MessageInput: "Email is not correct")
+            
+        } else if NewPassTextField.text == "" {
+            //Parolani girmemissin.
+            AlertCreated(titleInput: "Error!", MessageInput: "Password is not correct")
+            
+        } else if NewPassTextField.text != ConfirmPassTextField.text {
+            //Parolalar uyusmuyor.
+            AlertCreated(titleInput: "Error!", MessageInput: "Passwords did not match")
+    
+            
+        } else {
+            //Kayit basarili.
+            AlertCreated(titleInput: "Congrats!", MessageInput: "You registered..!")
+            
+        }
+        
+    }
+    
+    func AlertCreated(titleInput: String, MessageInput: String) {
+        let WarningMessage = UIAlertController(title: titleInput, message: MessageInput, preferredStyle: UIAlertController.Style.alert)
         let OkeyButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { UIAlertAction in
             //OK Button'una tiklaninca olacaklar.
             print("Ok Button tapped...")
         }
         
         WarningMessage.addAction(OkeyButton)
-        self.present(WarningMessage, animated: true, completion: nil)
+        self.present(WarningMessage, animated: true)
     }
     
 }
